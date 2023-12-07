@@ -1,0 +1,81 @@
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://192.168.147.128:3306/library?useSSL=false&useUnicode=true&characterEncoding=UTF-8&&serverTimezone=Asia/Shanghai
+    username: root
+    password: bbbbbblackfree
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+      connection-timeout: 30000
+      max-lifetime: 120000
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 20MB
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  redis:
+    #    host: 127.0.0.1
+    host: 192.168.147.128
+    port: 6379
+  rabbitmq:
+    host: 192.168.147.128 # 主机名
+    port: 5672 # 端口
+    virtual-host: / # 虚拟主机
+    username: guest # 用户名
+    password: guest
+    listener:
+      simple:
+        prefetch: 1 #每次只能获取一条消息，处理完成才能获取下一个消息
+  mail:
+    host: smtp.qq.com
+    username: 1370441324@qq.com
+    password: jbsdymeewtogjdgh
+    properties:
+      mail:
+        smtp:
+          port: 465
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            enable: true
+    default-encoding: utf-8
+server:
+  tomcat:
+    connection-timeout: 18000000
+  port: 8888
+#logging:
+#  level:
+#    root: debug
+mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:mapper/*Dao.xml
+  type-aliases-package: com.bbbbbblack.domain
+file:
+  #  windows中的图片路径
+  real-path: D:/DataBase/pictures/
+  #  linux中的图片路径
+  #  real-path: /usr/projects/compus/picture/
+  vir-path: /file/
+#  支付宝
+alipay:
+  appId: 2021000121622568
+  appPrivateKey: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCfVGNnyBdklKMF4b4GZBvwTvCJZMrMeCNenAHY/AuDr8YWArAKXgiz52WfzOTGoOmvWVspDkDAudGEqc/4/qKc08z6UE9ekNrAqKG6+aLBnhb7+hfSpcp0kC2sCe90QBg1BeIVSGWrACN8zA+eh8i2DL2A9j6H+mIWv3C0x1P43nV9n6B11Heb2QKxu2aQJXdtl41d1D+2LB1uPvB86VnSbeTtp13hdndqdp/I/5nMMq+UR9EsWhnGt49EmmXa3Yysv5KRoSpKQU214jg+i4AHEVLYIoDE8PSahW8iA0bxdn6QFwDftPv+hYyVK6EYT3DFMCvgBv3gYhw7D+qyxBsvAgMBAAECggEABeDlMgUN5+YcBbGIg0/aQAmJkmgnm1erZmg3ITxbaGZp1pIO0LMbexfEhhrXLgTt2kxfsqoV9YZllpF1XOh4M3UVEP85jnGlwIn4PZ/MQ3yDuJRHoLwBNj/Dj59mOFHNEte+ua5MIf0FUittQBoea6kYrNNpBzdTuychD2pzTLFJP3Iqcx8hysqflIqWo08QlbRab2I9lgAEb3KloY0iRhWG1T1wfhfkOIT4wOVoHVOj2D1gv7g3t2FM45VIfea7qNdNF+k6oBYaZb+DjKdy/KfRKpSnNMN7OZgrS8f6giYqlJ5JFLmCBz/NREwDNuFSr7HChY/jViURn25/kFtnoQKBgQD6zMBW7pQOX/bS7Y2V18j5DUP0Q816DLurfRI6tP6mXi6bwOLMMME7iXbgV5sTL4Va+nyviPIKuwSyjxFHvQpgCxGR/t+MMYeEYXC4XdbJ2RWGuf47svisaNFdtYDVvTwMHWwfCPV1HDFMFPXwdpakvvQKfRICeQrP1RyWX/qlOQKBgQCiohy0Ush3bc+5s27ock4bMrO3MoRyNXHhlqUUMsRkxIUQjsbtNrO36wladFcUMSLv0p+ec6lWBd+5QQ64kKxCfIXHD90WcLwQffRutWd2bud9GDtfY2tCyWCL0WCIRU7ouv4hQWfI3lLtRkSQWhhXCIRQCtPayptLEyUyJE/rpwKBgQDru8iN7XH8kPbPC7opPcoJTg6xaYmZTp6XcdfQlo9EkQH+JC8I/kqiS3MRK0b3oZMXEJph47adn2uq6g6z/1vhKoY5U/eLLoLSS0RIBuv8ja9OE0SDmJVkeKFSE2glftkSChW2lhUhHn63pHwGqXCvKUz5DtX+vQcMkqNsNIrDAQKBgG4hkYabOJ2Hg0+hrs1B+pp4bzLzxrUAdCnrtcZDyrLiUamwxg0FKha11xOmDQHjdGErJGRMtrNGLwZog+uALOapJH50w6bamMAiS1BdD78nwyL3Md2amZwUeoi0NMaTCKiZWFZ00C86PrXnC68lE658Wf1KF8TlxtvED0AxTt2pAoGBAKG3MyaYgQL9+6RO+aUQPuBhu1LWKYthrkztmgtb/SgBoSYbPsTLy4L+m+yhG6CeR96UvjGZKSDk2hgqCANsSR0g8bz+TMvipSVgkP0ZQJ2aNhpf1ESApq9lp730thFxojdSXORhs8V7IH1nLnJKZEyX0LtCz85+PjqqjMAxlTmC
+  #  windows中的支付宝证书路径
+  appCertPublicPath: C:\Users\black\Downloads\appCertPublicKey_2021000121622568.crt
+  alipayCertPublicPath: C:\Users\black\Downloads\alipayCertPublicKey_RSA2.crt
+  alipayRootCertPath: C:\Users\black\Downloads\alipayRootCert.crt
+  notifyUrl: https://i5101b0918.oicp.vip/deposit/payNotify
+# 个推api参数
+getui:
+  appId: tmtDw44sNx8hydaZL9ja8
+  appKey: 9Pg0haoPn38L7MdBYfeOG2
+  masterSecret: sF0upAO0cP6Se8o3WmHaK5
+#  //监听指定db0,db1的set事件
+#        listenerContainer.addMessageListener(new RedisListener(), new PatternTopic("__keyevent@1__:set"));
+#        listenerContainer.addMessageListener(new RedisListener(), new PatternTopic("__keyevent@0__:set"));

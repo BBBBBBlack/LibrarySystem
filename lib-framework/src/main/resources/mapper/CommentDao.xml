@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbbbbblack.dao.CommentDao">
+    <select id="findComments" resultType="com.bbbbbblack.domain.vo.CommentVo">
+        select t1.id, t1.root_id, t1.to_comment_id, t1.content, t1.create_time,
+               t2.nick_name create_by_name,t2.head_img_url create_by_picture,
+               t4.nick_name to_comment_name
+        from comment as t1
+                 left join user as t2
+                           on t1.create_by=t2.id
+                 left join comment as t3
+                           on t1.to_comment_id=t3.id
+                 left join user as t4
+                           on t3.create_by=t4.id
+        where t1.root_id=#{rootId} and t1.post_id=#{postId}
+    </select>
+    <select id="findMyComment" resultType="com.bbbbbblack.domain.vo.CommentVo">
+        select t1.id, t1.root_id, t1.to_comment_id, t1.content, t1.create_time,
+               t4.nick_name to_comment_name
+        from comment as t1
+                 left join comment as t3
+                           on t1.to_comment_id=t3.id
+                 left join user as t4
+                           on t3.create_by=t4.id
+        where t1.create_by=#{userId}
+    </select>
+    <select id="findMyReply" resultType="com.bbbbbblack.domain.vo.CommentVo">
+        select t1.id, t1.root_id, t1.to_comment_id, t1.content, t1.create_time,
+               t2.nick_name create_by_name
+        from comment as t1
+                 left join user as t2
+                           on t1.create_by=t2.id
+        where t1.to_comment_id=#{toCommentId}
+    </select>
+    <delete id="deleteComments">
+        delete from comment
+        where id=#{commentId} or root_id=#{commentId} or to_comment_id=#{commentId}
+    </delete>
+</mapper>

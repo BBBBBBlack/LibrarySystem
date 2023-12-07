@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbbbbblack.dao.DepositOrderDao">
+    <insert id="InsertOrder" parameterType="com.bbbbbblack.domain.entity.DepositOrder" keyProperty="outTradeNo"
+            useGeneratedKeys="true">
+        insert into deposit_order (subject, total_amount, user_id, create_time)
+        values (#{subject}, #{totalAmount}, #{userId}, #{createTime})
+    </insert>
+</mapper>
